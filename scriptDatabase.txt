@@ -1,0 +1,61 @@
+
+
+create table proprietario(
+id_proprietario serial,
+nome varchar(100) not null,
+codigo varchar(50) not null,
+tppessoa char(2) not null,
+constraint pk_proprietario primary key (id_proprietario)
+);
+
+create table veiculo(
+id_veiculo serial,
+placa varchar(20),
+cor varchar(20),
+constraint pk_veiculo primary key (id_veiculo)
+);
+
+create table veiculo_proprietario(
+id_veiculo_proprietario serial,
+id_veiculo int not null,
+id_proprietario int not null,
+constraint pk_veiculo_proprietario primary key (id_veiculo_proprietario),
+constraint fk_veiculo_proprietario_proprietario foreign key(id_proprietario) references proprietario,
+constraint fk_veiculo_proprietario_veiculo foreign key (id_veiculo) references veiculo
+);
+
+create table movimentacoes(
+id_movimentacao serial,
+dt_entrada date not null,
+dt_previsao_saida date not null,
+dt_entrega date,
+id_veiculo integer not null,
+constraint pk_movimentacao primary key (id_movimentacao),
+constraint fk_movimentacoes_veiculos foreign key (id_veiculo) references veiculo
+	
+);
+
+create table servicos(
+id_servico serial,
+ds_servico varchar(200),
+vlr_serivico decimal(10,2),
+constraint pk_servicos primary key (id_servico)
+);
+
+create table servico_movimentacao(
+id_servico_movimentacoes serial,
+id_movimentacao integer not null,
+id_servico integer not null,
+constraint pk_servico_movimentacao primary key (id_servico_movimentacoes),
+constraint fk_servico_movimentacao_movimentacao foreign key (id_movimentacao) references movimentacoes,
+constraint fk_servico_movimentacao_servico foreign key (id_servico) references servicos
+);
+
+create table usuarios (
+id_usuarios serial,
+nome varchar(50) not null,
+login varchar(100) not null,
+senha varchar(100) not null,
+constraint pk_usuarios primary key (id_usuarios));
+
+insert into usuarios values(default, 'administrador', 'admin', md5(md5(encode('123'::bytea, 'base64'))));
