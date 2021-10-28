@@ -151,7 +151,7 @@ public class TelaLogin extends javax.swing.JFrame {
         boolean existe = usuario.login(user, pass);
         System.out.println("ta funcionando porra");
         if(existe){
-            TelaPrincipal tela = new TelaPrincipal();
+            TelaMovimetacoes tela = new TelaMovimetacoes();
             tela.setVisible(true);
             dispose();
         }

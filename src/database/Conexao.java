@@ -22,7 +22,7 @@ public class Conexao {
     //Link for the driver
     private final static String DRIVER = "org.postgresql.Driver";
     //Link for the url of database
-    private final static String URL = "jdbc:postgresql://localhost:5432/bancao";
+    private final static String URL = "jdbc:postgresql://localhost:5432/oficina";// pode ser bancao na univates ta salvo como oficina
     //user and password how givs acess to the database
     private final static String USER = "postgres";
     private final static String PASS = "postgres";

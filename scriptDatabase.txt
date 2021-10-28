@@ -59,3 +59,11 @@ senha varchar(100) not null,
 constraint pk_usuarios primary key (id_usuarios));
 
 insert into usuarios values(default, 'administrador', 'admin', md5(md5(encode('123'::bytea, 'base64'))));
+
+
+insert into proprietario values(default, 'gui', '03826110048', 'pf')
+insert into veiculo values(default, 'IRG1079', 'vermelho' )
+insert into veiculo_proprietario values(default,1,1 )
+
+insert into movimentacoes values(default, '24/10/2021', '26/10/2021', null, 1)
+
