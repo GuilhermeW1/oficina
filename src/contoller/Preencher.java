@@ -18,20 +18,11 @@ import javax.swing.table.TableColumn;
 
 /**
  *
- * @author guilherme.w1
+ * @author Guilherme
  */
-public class MovimentacoesController {
+public class Preencher {
     
-    public void popular(JTable jtbDefault){
-        
-        String wSql = " SELECT id_movimentacao, dt_entrada FROM movimentacoes";
-        
-        Preencher preencher = new Preencher();
-        preencher.preencher(jtbDefault, wSql );
-        
-    }
-/* 
-    public void preencher(JTable jtbUsuarios) {
+    public void preencher(JTable jtbUsuarios, String sql) {
 
         Conexao.openConnection();
 
@@ -46,7 +37,7 @@ public class MovimentacoesController {
 
         try {
 
-            String wSql = " SELECT id_movimentacao, dt_entrada FROM movimentacoes";
+            String wSql = sql;
 
             result = Conexao.stmt.executeQuery(wSql);
 
@@ -114,6 +105,5 @@ public class MovimentacoesController {
         });
         //return (true);
     }
-*/
-
+    
 }
