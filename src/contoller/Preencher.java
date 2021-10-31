@@ -22,16 +22,36 @@ import javax.swing.table.TableColumn;
  */
 public class Preencher {
     
-    public void preencher(JTable jtbUsuarios, String sql) {
+    public void preencher(JTable jtbUsuarios, String sql, int identificacao, int colunas ) {
 
         Conexao.openConnection();
 
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector(); //receber os dados do banco
-
-        cabecalhos.add("Id");
-        cabecalhos.add("Data de entrada");
-        cabecalhos.add("Exc");
+        
+        /*
+            O contador recebe a identificaçao +1 pois o contador e usado na criação das
+            colunas e estas não podem começar com o indice 0 
+        */
+        int contador = colunas;
+        
+        switch(identificacao) {
+            case 0:
+                cabecalhos.add("Id");
+                cabecalhos.add("Placa");
+                cabecalhos.add("Data de entrada");
+                break;
+            case 1:
+                cabecalhos.add("Proprietario");
+                cabecalhos.add("Placa Veiculo");
+                cabecalhos.add("Cor do Veiculo");
+                
+                break;
+                
+        }
+        
+        //cabecalhos.add("Exc");
+        
 
         ResultSet result = null;
 
@@ -42,16 +62,21 @@ public class Preencher {
             result = Conexao.stmt.executeQuery(wSql);
 
             Vector<Object> linha;
+           
             while (result.next()) {
                 linha = new Vector<Object>();
-
-                linha.add(result.getInt(1));
-                linha.add(result.getString(2));
-                //linha.add("X");
+                
+                for(int i =1 ; i<= contador;i++){
+                    linha.add(result.getString(i));
+                }
+                //linha.add(result.getString(1));
+                //linha.add(result.getString(2));
+                //linha.add(result.getString(3));
+                
 
                 dadosTabela.add(linha);
             }
-
+            
         } catch (SQLException e) {
             System.out.println("problemas para popular tabela..." +e);
             System.out.println(e);
@@ -68,10 +93,17 @@ public class Preencher {
 
         // permite seleção de apenas uma linha da tabela
         jtbUsuarios.setSelectionMode(0);
-
-        // redimensiona as colunas de uma tabela
+        
+        //=========================================================================
+        /* 
+            redimensiona as colunas de uma tabela não e necessario mas
+            **pode fazer uma coluna ficar mais larga sem ela ira alocar de forma
+            padrao o tamnaho das colunas
+        */
+        
+        /*
         TableColumn column = null;
-        for (int i = 0; i <= 2; i++) {
+        for (int i = 0; i <= 1; i++) {
             column
                     = jtbUsuarios.getColumnModel().getColumn(i);
             switch (i) {
@@ -86,7 +118,8 @@ public class Preencher {
                     break;
             }
         }
-
+        ============================================================================
+        */
         //função para deixar a tabela zebrada
         jtbUsuarios.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override

@@ -84,8 +84,8 @@ public class Combos {
         cbCombo.addItem(combo);
         while (result.next()) {
             combo = new Combos();
-            combo.setCodigo(result.getString(1));
-            combo.setDescricao(result.getString(2));
+            combo.setCodigo(result.getString(1));//?????????????????????
+            combo.setDescricao(result.getString(1));
             cbCombo.addItem(combo);
         }
         return 0;

@@ -17,6 +17,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     /**
      * Creates new form TelaMovimetacoes
      */
+    
     MovimentacoesController mvController;
     Combos comboMovimentacao;
     
@@ -57,6 +58,8 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -138,6 +141,18 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Veiculos");
+
+        jMenuItem5.setText("Veiculos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Adiconar veiculos");
+        jMenu2.add(jMenuItem6);
+
         jMenuBar1.add(jMenu2);
 
         jMenu6.setText("Sair");
@@ -194,6 +209,12 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+    
+    //tela de veiculos
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        TelaVeiculo tela = new TelaVeiculo();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +273,8 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;

@@ -24,10 +24,12 @@ public class MovimentacoesController {
     
     public void popular(JTable jtbDefault){
         
-        String wSql = " SELECT id_movimentacao, dt_entrada FROM movimentacoes";
+        String wSql = " select m.id_movimentacao, v.placa , m.dt_entrada\n " +
+                      " from movimentacoes m , veiculo v\n " +
+                      " where m.id_veiculo= v.id_veiculo ";
         
         Preencher preencher = new Preencher();
-        preencher.preencher(jtbDefault, wSql );
+        preencher.preencher(jtbDefault, wSql, 0, 3 );
         
     }
 /* 
