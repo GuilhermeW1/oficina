@@ -30,8 +30,6 @@ public class Preencher {
         Vector dadosTabela = new Vector(); //receber os dados do banco
         
         /*
-            O contador recebe a identificaçao +1 pois o contador e usado na criação das
-            colunas e estas não podem começar com o indice 0 
         */
         int contador = colunas;
         
@@ -47,6 +45,11 @@ public class Preencher {
                 cabecalhos.add("Cor do Veiculo");
                 
                 break;
+            case 2:
+                cabecalhos.add("Id");
+                cabecalhos.add("Descrição serviço");
+                cabecalhos.add("Valor do serviço");
+                        
                 
         }
         
