@@ -8,16 +8,21 @@
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaVeiculo.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/MovimentacoesController.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaLogin.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Veiculo.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/tools/Tools.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/Preencher.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Movimentacoes.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaProprietario.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/UserController.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaAdicionar.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/tools/Combos.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/VeiculoController.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/ServicosController.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/User.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Proprietario.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaMovimetacoes.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaServicos.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Servicos.java</file>
         </group>
     </open-files>
 </project-private>

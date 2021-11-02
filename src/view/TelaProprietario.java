@@ -124,8 +124,9 @@ public class TelaProprietario extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          Proprietario proprietario;
        
-        System.out.println("Criando");
+        
         boolean validacao = validarDados();
+        
         if(validacao){
             proprietario = armazenarDados();
             objProprietarioController = new ProprietarioController();

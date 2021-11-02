@@ -115,7 +115,14 @@ public class TelaServicos extends javax.swing.JFrame {
 
         jLabel3.setText("Valor");
 
+        lblId.setText("ID");
+
         jButton3.setText("Salvar/Adicionar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Limpar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +227,97 @@ public class TelaServicos extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         limparTela();
     }//GEN-LAST:event_jButton4ActionPerformed
+    //botao adicionar servico
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       try{
+           
     
+       Servicos servicos;
+       
+       double validacao = validarDados();
+       
+       if(validacao == -1 ){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro ");
+            
+      
+       }else{
+           
+           servicos = guardarDados(validacao);
+           ServicosController servicoController = new ServicosController();
+          
+           if(servicoController.incluir(servicos)){
+               limparTela();
+               atualizarTabela();
+               CaixaDeDialogo.obterinstancia().exibirMensagem("Servico adicionado com sucesso ");
+                
+
+           }else{
+               System.out.println("erro ao incluir btn incluir ");
+               limparTela();
+           }
+           
+           
+           
+       }
+       
+       
+       }catch(Exception e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro adicionar servico tela servico "+e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public Servicos guardarDados(double validacao){
+        try{
+        Servicos objServicos = new Servicos();
+        objServicos.setDs_servico(jtxtDsServico.getText());
+        objServicos.setVlr_servico(validacao);
+        
+        return objServicos;
+        }catch(Exception e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro guardar dados tela servicos"+e);
+            return null;
+
+        }   
+        
+    } 
+    
+    public double validarDados(){
+        try{
+            
+       
+        double valor = 0.00;
+        
+        if(jtxtDsServico.getText().equals("") ){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Descrição vazia");
+            return -1;
+            
+        }
+       
+        if(txtValor.getText().equals("") ){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Valor do serviço nullo");
+            return -1;
+           
+        }else {
+            
+            String novoValor;
+            novoValor = txtValor.getText().toString();
+            System.out.println("valor string "+ novoValor);
+            
+            valor = Double.parseDouble(novoValor);
+            System.out.println("valor double " + valor);
+            if(valor < 0 ){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Valor menor do que 0.00");
+
+            }
+            System.out.println("valor "+valor);
+            return valor;
+        }
+        }catch(NumberFormatException e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro validar dados tela servicos "+e);
+            return -1;
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */

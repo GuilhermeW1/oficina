@@ -27,6 +27,28 @@ public class ServicosController {
         
         
     }
+    public boolean incluir(Servicos objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            
+            String sql = "insert into servicos values(default, ?, ?)";
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, objeto.getDs_servico());
+            stmt.setDouble(2, objeto.getVlr_servico());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        }catch(Exception e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro ao incluir "+e);
+            return false;
+        }
+    }
+    
+    
     
     public Servicos buscar(String cod){
         Servicos objServicos = null;
