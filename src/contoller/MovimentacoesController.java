@@ -22,14 +22,29 @@ import javax.swing.table.TableColumn;
  */
 public class MovimentacoesController {
     
-    public void popular(JTable jtbDefault){
+    public void popular(JTable jtbDefault, String tipo){
         
-        String wSql = " select m.id_movimentacao, v.placa , m.dt_entrada\n " +
-                      " from movimentacoes m , veiculo v\n " +
-                      " where m.id_veiculo= v.id_veiculo ";
+        
         
         Preencher preencher = new Preencher();
-        preencher.preencher(jtbDefault, wSql, 0, 3 );
+         String wSql ="";
+        if(tipo.equals("p")){
+            wSql = " select m.id_movimentacao, v.placa , m.dt_entrada " +
+                      " from movimentacoes m , veiculo v " +
+                      " where m.id_veiculo= v.id_veiculo "
+                    + " and encerrados = false;";
+        preencher.preencher(jtbDefault, wSql, 0, 3 );     
+        }else if(tipo.equals("e")){
+            wSql = " select m.id_movimentacao, v.placa , m.dt_entrada " +
+                      " from movimentacoes m , veiculo v " +
+                      " where m.id_veiculo= v.id_veiculo "
+                    + " and encerrados = true;";
+            preencher.preencher(jtbDefault, wSql, 0, 3 );  
+        }else{
+            
+        }
+          
+       
         
     }
 /* 

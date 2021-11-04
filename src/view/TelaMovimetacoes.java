@@ -23,7 +23,8 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     
     public TelaMovimetacoes() {
         initComponents();
-        atualizarTabela();
+        
+        atualizarTabela("p");
         
                
         
@@ -46,7 +47,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblMovimentos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbMovimentacoesPendentes = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -73,8 +74,8 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("Pendentes");
+        lblMovimentos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblMovimentos.setText("Pendentes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,14 +83,14 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(338, 338, 338)
-                .addComponent(jLabel2)
+                .addComponent(lblMovimentos)
                 .addContainerGap(268, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel2)
+                .addComponent(lblMovimentos)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -119,9 +120,19 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         jMenu1.add(jmenuAdicionar);
 
         jmenuEncerrados.setText("Encerrados");
+        jmenuEncerrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuEncerradosActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmenuEncerrados);
 
         jmenuPendentes.setText("Pendentes");
+        jmenuPendentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuPendentesActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmenuPendentes);
 
         jMenuBar1.add(jMenu1);
@@ -205,7 +216,8 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //jmeunu Adicionar movimentações
     private void jmenuAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuAdicionarActionPerformed
-       
+       TelaAdicionar tela = new TelaAdicionar();
+       tela.setVisible(true);
     }//GEN-LAST:event_jmenuAdicionarActionPerformed
     
     //adicionar proprietarios
@@ -230,6 +242,15 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         TelaServicos tela = new TelaServicos();
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+    
+    //encerrados
+    private void jmenuEncerradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuEncerradosActionPerformed
+        atualizarTabela("e");
+    }//GEN-LAST:event_jmenuEncerradosActionPerformed
+
+    private void jmenuPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuPendentesActionPerformed
+        atualizarTabela("p");
+    }//GEN-LAST:event_jmenuPendentesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,16 +289,23 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     
     
     
-    private void atualizarTabela(){
+    private void atualizarTabela(String tipo){
         mvController = new MovimentacoesController();
-        
-        mvController.popular(jtbMovimentacoesPendentes);
+        if(tipo.equals("p")){
+            lblMovimentos.setText("Pendentes");
+            
+         
+            
+        }else if(tipo.equals("e")){
+            lblMovimentos.setText("Encerrados");
+                    
+        }
+        mvController.popular(jtbMovimentacoesPendentes, tipo);
                 
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -299,5 +327,6 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmenuEncerrados;
     private javax.swing.JMenuItem jmenuPendentes;
     private javax.swing.JTable jtbMovimentacoesPendentes;
+    private javax.swing.JLabel lblMovimentos;
     // End of variables declaration//GEN-END:variables
 }

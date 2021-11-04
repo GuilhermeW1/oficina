@@ -69,7 +69,7 @@ public class Combos {
         return 1;
     }
 
-    public int PreencheCombo(String wSQL) throws SQLException{
+    public int PreencheCombo(String wSQL, String n) throws SQLException{
             
         Conexao.openConnection();
         result = Conexao.stmt.executeQuery(wSQL);
@@ -80,12 +80,16 @@ public class Combos {
 
         Combos combo = new Combos();
         combo.setCodigo("");
-        combo.setDescricao("Selecione...");
+        if(n == "" ){
+            combo.setDescricao("Selecione..");
+        }else{
+            combo.setDescricao(n);
+        }
         cbCombo.addItem(combo);
         while (result.next()) {
             combo = new Combos();
-            combo.setCodigo(result.getString(1));//?????????????????????
-            combo.setDescricao(result.getString(1));
+            combo.setCodigo(result.getString(1));
+            combo.setDescricao(result.getString(2));
             cbCombo.addItem(combo);
         }
         return 0;

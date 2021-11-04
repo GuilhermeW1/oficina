@@ -36,7 +36,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
         
         comboProprietario = new Combos(jC_Proprietraio_TelaVeiculo);
         try{
-            comboProprietario.PreencheCombo("select nome, codigo from proprietario");
+            comboProprietario.PreencheCombo("select id_proprietario, nome from proprietario", "Proprietario");
         }catch(SQLException e){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao preencher CB_TV"+e);
         }

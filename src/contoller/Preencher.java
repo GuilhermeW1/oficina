@@ -22,7 +22,7 @@ import javax.swing.table.TableColumn;
  */
 public class Preencher {
     
-    public void preencher(JTable jtbUsuarios, String sql, int identificacao, int colunas ) {
+    public void preencher(JTable jtbUsuarios, String sql, int identificacao, int numeroColunas ) {
 
         Conexao.openConnection();
 
@@ -31,13 +31,14 @@ public class Preencher {
         
         /*
         */
-        int contador = colunas;
+        int contador = numeroColunas;
         
         switch(identificacao) {
             case 0:
                 cabecalhos.add("Id");
                 cabecalhos.add("Placa");
                 cabecalhos.add("Data de entrada");
+                //cabecalhos.add("concluido");
                 break;
             case 1:
                 cabecalhos.add("Proprietario");

@@ -67,3 +67,18 @@ insert into veiculo_proprietario values(default,1,1 )
 
 insert into movimentacoes values(default, '24/10/2021', '26/10/2021', null, 1)
 
+
+=====================================================================================
+alteracoes no banco
+
+
+select * from movimentacoes
+delete from movimentacoes where id_movimentacao = 1
+alter table movimentacoes rename column dt_previsao_saida to encerrado 
+alter table movimentacoes drop column encerrado
+alter table movimentacoes add column encerrados boolean 
+
+insert into movimentacoes values(default, '24/10/2021', null, 1, false)
+
+
+
