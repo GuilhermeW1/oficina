@@ -25,6 +25,8 @@ public class TelaAdicionar extends javax.swing.JFrame {
         initComponents();
         atualizarTabelaProp();
         atualizarTabelaVeiculo(0);
+        serController = new ServicosController();
+        serController.popular(jtbAdicionarServico);
         atualizarTabelaServicos();
         
     }
@@ -89,7 +91,7 @@ public class TelaAdicionar extends javax.swing.JFrame {
         jcbVeiculo_TelaAdicionar = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbAdicionarServico = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -123,7 +125,7 @@ public class TelaAdicionar extends javax.swing.JFrame {
 
         jLabel4.setText("Veiculo");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbAdicionarServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -134,7 +136,7 @@ public class TelaAdicionar extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtbAdicionarServico);
 
         jLabel5.setText("Valor");
 
@@ -274,9 +276,9 @@ public class TelaAdicionar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> jcbCliente_TelaAdicionar;
     private javax.swing.JComboBox<String> jcbServico_TelaAdicionar;
     private javax.swing.JComboBox<String> jcbVeiculo_TelaAdicionar;
+    private javax.swing.JTable jtbAdicionarServico;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,4 +76,39 @@ public class ServicosController {
         }
         return objServicos;
     }
+    
+    public boolean alterar(Servicos objeto){
+        try{
+        Connection con =  Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        StringBuilder sql = new StringBuilder();
+        
+        
+        sql.append(" update servicos ");
+        //sql.append(" set id_servico = ?, ");
+        sql.append(" set ds_servico = ?, ");
+        sql.append(" vlr_serivico = ? ");
+        sql.append(" where id_servico = ? ");
+        
+        stmt = con.prepareStatement(sql.toString());
+        //stmt.setInt(1, objeto.getId_servico());
+        stmt.setString(1, objeto.getDs_servico());
+        stmt.setDouble(2, objeto.getVlr_servico());
+        stmt.setInt(3, objeto.getId_servico());
+        
+        stmt.executeUpdate();
+        
+        return true;
+        }catch(SQLException e ){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro alterar servico: "+e);
+            return false;
+        }
+        
+    }
+    
+        
+        
+        
+    
 }

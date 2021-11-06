@@ -34,7 +34,7 @@ public class Conexao {
         try{
             Connection con = getConnection();
             stmt = con.createStatement();
-            System.out.println("Connection has ben sussesfulelkfsn");
+            //System.out.println("Connection has ben sussesfulelkfsn");
             
         }catch(SQLException e){
             System.out.println(" ERROR AT openConection(): " + e.getMessage());

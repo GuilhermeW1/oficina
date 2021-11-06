@@ -57,7 +57,6 @@ public class TelaServicos extends javax.swing.JFrame {
         jtbServicos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtxtDsServico = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -105,8 +104,6 @@ public class TelaServicos extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("id");
-
         jtxtDsServico.setColumns(20);
         jtxtDsServico.setRows(5);
         jScrollPane2.setViewportView(jtxtDsServico);
@@ -149,9 +146,7 @@ public class TelaServicos extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel1)
-                        .addGap(185, 185, 185)
+                        .addGap(251, 251, 251)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                         .addComponent(jLabel3)
@@ -180,9 +175,7 @@ public class TelaServicos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
+                        .addComponent(jLabel2))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
@@ -234,6 +227,10 @@ public class TelaServicos extends javax.swing.JFrame {
     
        Servicos servicos;
        
+       if(lblId.getText().equals("ID")){
+           
+       
+       
        double validacao = validarDados();
        
        if(validacao == -1 ){
@@ -242,7 +239,7 @@ public class TelaServicos extends javax.swing.JFrame {
       
        }else{
            
-           servicos = guardarDados(validacao);
+           servicos = guardarDados(validacao, 0);
            ServicosController servicoController = new ServicosController();
           
            if(servicoController.incluir(servicos)){
@@ -256,7 +253,27 @@ public class TelaServicos extends javax.swing.JFrame {
                limparTela();
            }
            
+       }
            
+       }else {
+           
+           double validacao = validarDados();
+           if(validacao == -1){
+               
+           }else {
+               servicos = guardarDados(validacao,1);
+               ServicosController serController = new ServicosController();
+               
+               if(serController.alterar(servicos)){
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Servico modificado com sucesso ");
+                    limparTela();
+                    atualizarTabela();
+
+               }else{
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao modificar o servico ");
+
+               }
+           }
            
        }
        
@@ -265,11 +282,14 @@ public class TelaServicos extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro adicionar servico tela servico "+e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-    public Servicos guardarDados(double validacao){
+    public Servicos guardarDados(double validacao, int tpGuardarDados){
         try{
         Servicos objServicos = new Servicos();
         objServicos.setDs_servico(jtxtDsServico.getText());
         objServicos.setVlr_servico(validacao);
+        if(tpGuardarDados == 1){
+            objServicos.setId_servico(Integer.parseInt(lblId.getText()));
+        }
         
         return objServicos;
         }catch(Exception e){
@@ -300,6 +320,8 @@ public class TelaServicos extends javax.swing.JFrame {
             
             String novoValor;
             novoValor = txtValor.getText().toString();
+            novoValor = novoValor.replace(",", ".");
+            
             System.out.println("valor string "+ novoValor);
             
             valor = Double.parseDouble(novoValor);
@@ -358,7 +380,6 @@ public class TelaServicos extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
