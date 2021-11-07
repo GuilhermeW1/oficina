@@ -27,7 +27,8 @@ public class TelaServicos extends javax.swing.JFrame {
     public void limparTela(){
         txtValor.setText("");
         jtxtDsServico.setText("");
-        lblId.setText("");
+        lblId.setText("ID");
+        
     }
     
     public void atualizarTabela(){
@@ -287,6 +288,7 @@ public class TelaServicos extends javax.swing.JFrame {
         Servicos objServicos = new Servicos();
         objServicos.setDs_servico(jtxtDsServico.getText());
         objServicos.setVlr_servico(validacao);
+       
         if(tpGuardarDados == 1){
             objServicos.setId_servico(Integer.parseInt(lblId.getText()));
         }
@@ -322,15 +324,15 @@ public class TelaServicos extends javax.swing.JFrame {
             novoValor = txtValor.getText().toString();
             novoValor = novoValor.replace(",", ".");
             
-            System.out.println("valor string "+ novoValor);
+            
             
             valor = Double.parseDouble(novoValor);
-            System.out.println("valor double " + valor);
+            
             if(valor < 0 ){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Valor menor do que 0.00");
 
             }
-            System.out.println("valor "+valor);
+            
             return valor;
         }
         }catch(NumberFormatException e){
