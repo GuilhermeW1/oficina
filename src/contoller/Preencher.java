@@ -90,6 +90,12 @@ public class Preencher {
 
             @Override
             public boolean isCellEditable(int row, int column) {
+                /*
+                int[] selection = jtbUsuarios.getSelectedRows();
+                for(int i = 1; i <= selection.length; i++){
+                    System.out.println("linha selecionada "+ selection.length);
+                }
+                */
                 return false;
             }
             // permite seleção de apenas uma linha da tabela

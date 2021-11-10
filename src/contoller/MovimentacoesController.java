@@ -29,13 +29,13 @@ public class MovimentacoesController {
         Preencher preencher = new Preencher();
          String wSql ="";
         if(tipo.equals("p")){
-            wSql = " select m.id_movimentacao, v.placa , m.dt_entrada " +
+            wSql = " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " +
                       " from movimentacoes m , veiculo v " +
                       " where m.id_veiculo= v.id_veiculo "
                     + " and encerrados = false;";
         preencher.preencher(jtbDefault, wSql, 0, 3 );     
         }else if(tipo.equals("e")){
-            wSql = " select m.id_movimentacao, v.placa , m.dt_entrada " +
+            wSql = " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " +
                       " from movimentacoes m , veiculo v " +
                       " where m.id_veiculo= v.id_veiculo "
                     + " and encerrados = true;";
