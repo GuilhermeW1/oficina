@@ -7,6 +7,8 @@ package view;
 
 import contoller.VeiculoController;
 import java.sql.SQLException;
+import model.Veiculo;
+import model.VeiculoProprietario;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -21,7 +23,10 @@ public class TelaVeiculo extends javax.swing.JFrame {
      */
     Combos comboProprietario;
     VeiculoController veiculoController;
+    Veiculo objVeiculo;
+    
     public TelaVeiculo() {
+        
         initComponents();
         
         atualizarTabela();
@@ -32,7 +37,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
     
     public void atualizarTabela(){
         veiculoController = new VeiculoController();
-        veiculoController.popular(jTable_TelaVeiculos);
+        veiculoController.preencher(jTable_TelaVeiculos);
         
         comboProprietario = new Combos(jC_Proprietraio_TelaVeiculo);
         try{
@@ -206,9 +211,56 @@ public class TelaVeiculo extends javax.swing.JFrame {
     
     //botao adicionar veiculo
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        boolean validacao = validarDados();
+       
+        if(validacao){
+            objVeiculo = guardarDados();
+            veiculoController = new VeiculoController();
+            
+            VeiculoProprietario veiculoProp = new VeiculoProprietario();
+            veiculoProp = guardarDadosA();
+            
+            if(veiculoController.incluir(objVeiculo)){
+               CaixaDeDialogo.obterinstancia().exibirMensagem("Veiculo adicionado com sucesso");
+               
+                
+            }
+            
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public boolean validarDados(){
+        if(txtCor_TelaVeiculo.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Cor do veiculo nula");
+            return false;
+        }
+        if(txtPlaca_TelaVeiculo.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Placa do veiculo nula");
+            return false;
+        }  
+        return true;
+       
+        
+    }
+    
+    private VeiculoProprietario guardarDadosA(){
+        VeiculoProprietario veiculoProp = new VeiculoProprietario();
+        
+        //veiculoProp.setId_veiculo();
+        //veiculoProp.setId_proprietario();
+        return null;
+    }
+    
+    private Veiculo guardarDados(){
+        Veiculo veiculo = new Veiculo();
+        veiculo.setCor(txtCor_TelaVeiculo.getText());
+        veiculo.setPlaca(txtPlaca_TelaVeiculo.getText());
+        
+        
+        return veiculo;
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         TelaProprietario tela = new TelaProprietario();
         tela.setVisible(true);

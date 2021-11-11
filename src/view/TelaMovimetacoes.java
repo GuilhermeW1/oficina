@@ -291,6 +291,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     
     private void atualizarTabela(String tipo){
         mvController = new MovimentacoesController();
+        
         if(tipo.equals("p")){
             lblMovimentos.setText("Pendentes");
             
@@ -300,7 +301,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
             lblMovimentos.setText("Encerrados");
                     
         }
-        mvController.popular(jtbMovimentacoesPendentes, tipo);
+        mvController.preencher(jtbMovimentacoesPendentes, tipo);
                 
         
     }

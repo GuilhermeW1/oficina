@@ -22,7 +22,7 @@ import javax.swing.table.TableColumn;
  */
 public class MovimentacoesController {
     
-    public void popular(JTable jtbDefault, String tipo){
+    /*public void popular(JTable jtbDefault, String tipo){
         
         
         
@@ -33,13 +33,13 @@ public class MovimentacoesController {
                       " from movimentacoes m , veiculo v " +
                       " where m.id_veiculo= v.id_veiculo "
                     + " and encerrados = false;";
-        preencher.preencher(jtbDefault, wSql, 0, 3 );     
+        //preencher.preencher(jtbDefault, wSql, 0, 3 );     
         }else if(tipo.equals("e")){
             wSql = " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " +
                       " from movimentacoes m , veiculo v " +
                       " where m.id_veiculo= v.id_veiculo "
                     + " and encerrados = true;";
-            preencher.preencher(jtbDefault, wSql, 0, 3 );  
+            //preencher.preencher(jtbDefault, wSql, 0, 3 );  
         }else{
             
         }
@@ -47,8 +47,8 @@ public class MovimentacoesController {
        
         
     }
-/* 
-    public void preencher(JTable jtbUsuarios) {
+ */
+    public void preencher(JTable jtbUsuarios, String tipo) {
 
         Conexao.openConnection();
 
@@ -56,24 +56,38 @@ public class MovimentacoesController {
         Vector dadosTabela = new Vector(); //receber os dados do banco
 
         cabecalhos.add("Id");
+        cabecalhos.add("Placa");
         cabecalhos.add("Data de entrada");
-        cabecalhos.add("Exc");
 
         ResultSet result = null;
-
+        StringBuilder wSql = new StringBuilder();
         try {
 
-            String wSql = " SELECT id_movimentacao, dt_entrada FROM movimentacoes";
+            if(tipo.equals("p")){
+            wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " );
+            wSql.append( " from movimentacoes m , veiculo v " );
+            wSql.append( " where m.id_veiculo= v.id_veiculo ");
+            wSql.append( " and encerrados = false; ");
+        //preencher.preencher(jtbDefault, wSql, 0, 3 );     
+        }else if(tipo.equals("e")){
+            wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " );
+            wSql.append( " from movimentacoes m , veiculo v " );
+            wSql.append( " where m.id_veiculo= v.id_veiculo ");
+            wSql.append( " and encerrados = true; ");
+            //preencher.preencher(jtbDefault, wSql, 0, 3 );  
+        }
 
-            result = Conexao.stmt.executeQuery(wSql);
+            result = Conexao.stmt.executeQuery(wSql.toString());
 
             Vector<Object> linha;
             while (result.next()) {
                 linha = new Vector<Object>();
+               // for(int i =1; i <= contado)
 
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
-                //linha.add("X");
+                linha.add(result.getString(3));
+                
 
                 dadosTabela.add(linha);
             }
@@ -84,7 +98,9 @@ public class MovimentacoesController {
         }
 
         jtbUsuarios.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
-
+            
+            //public Class getColumnClass(int column){ if class icon.class mais algns bgl
+            
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -131,6 +147,8 @@ public class MovimentacoesController {
         });
         //return (true);
     }
-*/
+    
+  
+
 
 }

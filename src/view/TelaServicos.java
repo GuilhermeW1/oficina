@@ -33,7 +33,7 @@ public class TelaServicos extends javax.swing.JFrame {
     
     public void atualizarTabela(){
         servicos = new ServicosController();
-        servicos.popular(jtbServicos);
+        servicos.preencher(jtbServicos);
     }
     
     public void preencherCampos(Servicos objeto){
