@@ -233,7 +233,11 @@ public class TelaVeiculo extends javax.swing.JFrame {
             
                 if(veiculoController.inserir(objVeiculo)){
                    veiculoPropController = new VeiculoProprietarioController();
-                   veiculoPropController.inserir(id_Proprietario);
+                   
+                   if(veiculoPropController.inserir(id_Proprietario)){
+                       CaixaDeDialogo.obterinstancia().exibirMensagem("Adicionado com sucesso");
+                               
+                   }
             }
             }catch(SQLException e){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("erro "+e.getMessage());
