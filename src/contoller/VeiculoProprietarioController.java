@@ -83,12 +83,17 @@ public class VeiculoProprietarioController {
             String sql = "select max(id_veiculo) as maximo from veiculo";
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
+            String numero = "";
+            while(rs.next()){
+               
+                 numero = rs.getString(1);
+                
+                }
             
-            System.out.println(""+rs.toString());
-            int algo = Integer.parseInt( rs.toString());
-            System.out.println(""+algo);
             
-            int contador = 0;
+            
+            int contador = Integer.parseInt(numero);
+            System.out.println("int "+numero);
            /*while (rs.next()) {
                 if(rs.last()){
                     rs.getRow();
