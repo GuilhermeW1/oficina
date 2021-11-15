@@ -125,7 +125,7 @@ public class VeiculoController {
         //return (true);
     }
     
-    
+    /*
     public boolean incluir(Veiculo objeto){
         try{
         Connection con = Conexao.getConnection();
@@ -133,13 +133,13 @@ public class VeiculoController {
         
         StringBuilder sql = new StringBuilder();
         
-        sql.append(" insert into veiculo values default, ?, ?");
+        sql.append(" insert into veiculo values (default, ?, ?)");
         
         stmt = con.prepareStatement(sql.toString());
         stmt.setString(1, objeto.getPlaca());
         stmt.setString(2, objeto.getCor());
         
-        stmt.executeQuery();
+        stmt.executeUpdate();
         return true;
         }catch(SQLException e){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro incluir veiculo "+ e);
@@ -147,7 +147,42 @@ public class VeiculoController {
         }
         
     } 
+    */
     
+    public boolean inserir(Veiculo objeto) throws SQLException{
+        Connection con = Conexao.getConnection();
+        try{
+           // con.setAutoCommit(false);
+            
+            PreparedStatement stmt = null;
+            //insercao na tabela veiculos
+            StringBuilder sql = new StringBuilder();
+            sql.append(" insert into veiculo values (default, ?, ?)");
+            stmt = con.prepareStatement(sql.toString());
+            stmt.setString(1, objeto.getPlaca());
+            stmt.setString(2, objeto.getCor());
+            stmt.executeUpdate();
+            //insercao na tabela veiculo prop
+           
+            /*
+            if(veicPropController.inserir(id_Proprietario, con)){
+                System.out.println("relacao adicionada com sucesso ");
+            }
+            */
+            
+            
+            
+            
+           // con.commit();
+            return true;
+        }catch(SQLException e){
+            //con.rollback();
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro "+e.getMessage());
+            return false;
+        }
+        
+        
+    }
     
     
 }

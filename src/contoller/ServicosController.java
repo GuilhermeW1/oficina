@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import javax.swing.Icon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -126,6 +127,7 @@ public class ServicosController {
         cabecalhos.add("Id");
         cabecalhos.add("Descriçao ");
         cabecalhos.add("Valor");
+        cabecalhos.add("Selecionar");
         
         try{
         ResultSet result = null;
@@ -142,6 +144,7 @@ public class ServicosController {
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getDouble(3));
+                linha.add("sla");
                 
 
                 dadosTabela.add(linha);
@@ -153,9 +156,20 @@ public class ServicosController {
         }
 
         jtbUsuarios.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
-
+            /*
+            @Override
+            public Class getColumnClass(int column){
+                if(column == 3){
+                    return Icon.class;
+                }else {
+                return null;
+                }
+            }
+              */  
+            
             @Override
             public boolean isCellEditable(int row, int column) {
+                //se column == 3 retorna true else false
                 return false;
             }
             // permite seleção de apenas uma linha da tabela

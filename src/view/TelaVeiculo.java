@@ -11,6 +11,7 @@ import model.Veiculo;
 import model.VeiculoProprietario;
 import tools.CaixaDeDialogo;
 import tools.Combos;
+import contoller.VeiculoProprietarioController;
 
 /**
  *
@@ -24,6 +25,9 @@ public class TelaVeiculo extends javax.swing.JFrame {
     Combos comboProprietario;
     VeiculoController veiculoController;
     Veiculo objVeiculo;
+    
+    VeiculoProprietario objVeiculoProp;
+    VeiculoProprietarioController veiculoPropController;
     
     public TelaVeiculo() {
         
@@ -211,25 +215,92 @@ public class TelaVeiculo extends javax.swing.JFrame {
     
     //botao adicionar veiculo
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         boolean validacao = validarDados();
-       
+        
+        
+        
         if(validacao){
+            objVeiculo = new Veiculo();
             objVeiculo = guardarDados();
+            
+            int id_Proprietario = guardarIdProp();
+            
             veiculoController = new VeiculoController();
             
-            VeiculoProprietario veiculoProp = new VeiculoProprietario();
-            veiculoProp = guardarDadosA();
+            
+            try{
+            
+                if(veiculoController.inserir(objVeiculo)){
+                   veiculoPropController = new VeiculoProprietarioController();
+                   veiculoPropController.inserir(id_Proprietario);
+            }
+            }catch(SQLException e){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("erro "+e.getMessage());
+            }
+            
+        }
+       
+        /*
+        if(validacao){
+            //recebe dados da tela para inserir no veiculo
+            objVeiculo = guardarDados();
+            //recebe dados da tela e do veiculo para inserir na relacao entre eles
+            objVeiculoProp = guardarDadosRel();
+           
+            veiculoController = new VeiculoController();
+            veiculoPropController = new VeiculoProprietarioController();
+            
+            
+            
+            //veiculoProp = guardarDadosA();
             
             if(veiculoController.incluir(objVeiculo)){
+                if(veiculoPropController.inserir(objVeiculoProp)){
+                    System.out.println("Relacao feita com sucesso ");
+                }
                CaixaDeDialogo.obterinstancia().exibirMensagem("Veiculo adicionado com sucesso");
                
                 
             }
             
+            
+            
         }
-        
+        */
         
     }//GEN-LAST:event_jButton1ActionPerformed
+    /*
+    private VeiculoProprietario guardarDadosRel(){
+        objVeiculoProp = new VeiculoProprietario();
+        
+        //nestas duas linhas instancio um objeto veiculo para poder obter o id do veiculo
+        //e fazer a relacao dos dois na tabela veiculo_prop
+        objVeiculo = new Veiculo();
+        objVeiculo = guardarDados();
+        
+        //vai pegar o id do proprietario selecionado na combo box
+        Combos c = (Combos) jC_Proprietraio_TelaVeiculo.getSelectedItem();
+        int id_proprietario = Integer.parseInt(c.getCodigo());
+        
+        
+        objVeiculoProp.setId_proprietario(id_proprietario);
+        System.out.println(" "+id_proprietario);
+        
+        objVeiculoProp.setId_veiculo(objVeiculo.getId_veiculo());
+        
+        System.out.println(""+objVeiculo.getId_veiculo() );
+        return objVeiculoProp;
+        
+    }
+    
+    */
+    public int guardarIdProp(){
+        Combos c = (Combos) jC_Proprietraio_TelaVeiculo.getSelectedItem();
+        int id_proprietario = Integer.parseInt(c.getCodigo());
+        
+        return id_proprietario;
+    }
     public boolean validarDados(){
         if(txtCor_TelaVeiculo.equals("")){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Cor do veiculo nula");
@@ -244,6 +315,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
         
     }
     
+    /*
     private VeiculoProprietario guardarDadosA(){
         VeiculoProprietario veiculoProp = new VeiculoProprietario();
         
@@ -251,12 +323,14 @@ public class TelaVeiculo extends javax.swing.JFrame {
         //veiculoProp.setId_proprietario();
         return null;
     }
+    */
     
     private Veiculo guardarDados(){
+        
         Veiculo veiculo = new Veiculo();
         veiculo.setCor(txtCor_TelaVeiculo.getText());
         veiculo.setPlaca(txtPlaca_TelaVeiculo.getText());
-        
+
         
         return veiculo;
     }
