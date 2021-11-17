@@ -236,6 +236,9 @@ public class TelaVeiculo extends javax.swing.JFrame {
                    
                    if(veiculoPropController.inserir(id_Proprietario)){
                        CaixaDeDialogo.obterinstancia().exibirMensagem("Adicionado com sucesso");
+                       atualizarTabela();
+                       limparTela();
+                       
                                
                    }
             }
@@ -244,6 +247,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
             }
             
         }
+        
        
         /*
         if(validacao){
@@ -274,6 +278,12 @@ public class TelaVeiculo extends javax.swing.JFrame {
         */
         
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void limparTela(){
+            txtCor_TelaVeiculo.setText("");
+            txtPlaca_TelaVeiculo.setText("");
+            jC_Proprietraio_TelaVeiculo.setSelectedIndex(0);
+        }
+    
     /*
     private VeiculoProprietario guardarDadosRel(){
         objVeiculoProp = new VeiculoProprietario();
