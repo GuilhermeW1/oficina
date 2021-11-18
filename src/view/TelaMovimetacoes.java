@@ -105,6 +105,11 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbMovimentacoesPendentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbMovimentacoesPendentesMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtbMovimentacoesPendentes);
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -251,6 +256,19 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     private void jmenuPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuPendentesActionPerformed
         atualizarTabela("p");
     }//GEN-LAST:event_jmenuPendentesActionPerformed
+    
+    
+    //metodo que pega a liçnha selecionada
+    private void jtbMovimentacoesPendentesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMovimentacoesPendentesMousePressed
+        int linhaSelecionada = jtbMovimentacoesPendentes.getSelectedRow();
+        
+        String codigo = jtbMovimentacoesPendentes.getModel().getValueAt(linhaSelecionada, 0).toString();
+        
+        
+                
+        
+        
+    }//GEN-LAST:event_jtbMovimentacoesPendentesMousePressed
 
     /**
      * @param args the command line arguments

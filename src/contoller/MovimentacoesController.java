@@ -8,6 +8,8 @@ package contoller;
 import database.Conexao;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -16,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import model.Movimentacoes;
 
 /**
  *
@@ -52,6 +55,7 @@ public class MovimentacoesController {
     public void preencher(JTable jtbUsuarios, String tipo) {
 
         Conexao.openConnection();
+        
 
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector(); //receber os dados do banco
@@ -60,19 +64,21 @@ public class MovimentacoesController {
         cabecalhos.add("Placa");
         cabecalhos.add("Data de entrada");
         cabecalhos.add("Concluido");
-                
+                   
 
         ResultSet result = null;
         StringBuilder wSql = new StringBuilder();
         try {
 
             if(tipo.equals("p")){
+            
             wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd / mm / yyyy'), m.encerrados " );
             wSql.append( " from movimentacoes m , veiculo v " );
             wSql.append( " where m.id_veiculo= v.id_veiculo ");
             wSql.append( " and encerrados = false; ");
         //preencher.preencher(jtbDefault, wSql, 0, 3 );     
         }else if(tipo.equals("e")){
+            
             wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd / mm / yyyy'), " );
             wSql.append( " m.encerrados ");
             wSql.append( " from movimentacoes m , veiculo v " );
@@ -91,8 +97,11 @@ public class MovimentacoesController {
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getString(3));
-                linha.add(result.getBoolean(4));
-                
+                if(tipo.equals("p")){
+                 linha.add("X");
+                }else if (tipo.equals("m")){
+                    linha.add("V");
+                }
 
                 dadosTabela.add(linha);
             }
@@ -159,6 +168,36 @@ public class MovimentacoesController {
     }
     
   
-
+    public void buscar(String codigo){
+        Movimentacoes objMov;
+        try{
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        String sql = "select * from movimentacoes where id =?";
+        stmt = con.prepareStatement(sql);
+        
+        rs = stmt.executeQuery();
+        
+        if(rs.next()){
+            objMov = new Movimentacoes();
+            
+            
+            
+            objMov.setId_movimentacoes(rs.getInt("id_movimentacao"));
+            objMov.setDt_entrada(rs.getDate("dt_entrada"));
+            
+            
+            
+        }
+        
+        }catch(SQLException e){
+            System.out.println("erro " +e.getMessage());
+        }
+        
+        
+        
+    }
 
 }
