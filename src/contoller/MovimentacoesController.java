@@ -9,6 +9,7 @@ import database.Conexao;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +53,9 @@ public class MovimentacoesController {
         
     }
  */
+    
+    //preenche a tabela de movimentacoes de acordo com o botao selecionado
+    //por padrao a tela ira entrar nas movimentacoes pendentes
     public void preencher(JTable jtbUsuarios, String tipo) {
 
         Conexao.openConnection();
@@ -69,7 +73,11 @@ public class MovimentacoesController {
         ResultSet result = null;
         StringBuilder wSql = new StringBuilder();
         try {
-
+            
+            //tipo ira receber a string mandada ao chamar o metodo
+            //com isso ele ira redirecionar para pendentes ou encerradas de acordo com 
+            //o botao clicado
+            
             if(tipo.equals("p")){
             
             wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd / mm / yyyy'), m.encerrados " );
@@ -99,7 +107,7 @@ public class MovimentacoesController {
                 linha.add(result.getString(3));
                 if(tipo.equals("p")){
                  linha.add("X");
-                }else if (tipo.equals("m")){
+                }else if (tipo.equals("e")){
                     linha.add("V");
                 }
 
@@ -167,7 +175,59 @@ public class MovimentacoesController {
         //return (true);
     }
     
-  
+    public boolean buscar(int id){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            String sql = "select id_movimentacao from movimentacoes where id_movimentacao = "+id;
+            
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }catch(Exception e){
+            System.out.println("erro "+e.getMessage());
+            return false;
+        }
+        
+    }
+    
+    public boolean marcarComoConcluido(int id){
+        Movimentacoes objMov;
+        
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            
+            StringBuilder sql = new StringBuilder();
+            if(buscar(id)){
+            
+                sql.append("update movimentacoes set encerrados = 'true' where id_movimentacao = "+id);
+            
+                stmt = con.prepareStatement(sql.toString());
+            
+                stmt.executeUpdate();
+                return true;
+            
+            }else{
+                return false;
+            }
+            
+        }catch(Exception e){
+            System.out.println("e"+e.getMessage());
+            return false;
+        }
+        
+        
+    }
+    
+    /*
     public void buscar(String codigo){
         Movimentacoes objMov;
         try{
@@ -175,7 +235,7 @@ public class MovimentacoesController {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        String sql = "select * from movimentacoes where id =?";
+        String sql = "select id_movimentacao, to_char(dt_entrada 'dd/MM/yyyy'), id_veiculo, encerrados from movimentacoes where id_movimentacao ="+codigo;
         stmt = con.prepareStatement(sql);
         
         rs = stmt.executeQuery();
@@ -183,10 +243,15 @@ public class MovimentacoesController {
         if(rs.next()){
             objMov = new Movimentacoes();
             
-            
+            //tipo entrada nao existe tem que ver alsdfmlsaçdf
+            String dt_entrada = tools.Datas.stringFormataData(rs.getDate("dt_entrada").toString());
+            System.out.println(""+dt_entrada);
             
             objMov.setId_movimentacoes(rs.getInt("id_movimentacao"));
-            objMov.setDt_entrada(rs.getDate("dt_entrada"));
+            objMov.setDt_entrada(dt_entrada);
+            objMov.setId_veiculo(rs.getInt("id_veiculo"));
+            objMov.setEncerrados(rs.getBoolean("encerrados"));
+            
             
             
             
@@ -199,5 +264,6 @@ public class MovimentacoesController {
         
         
     }
+*/
+}   
 
-}

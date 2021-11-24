@@ -283,7 +283,8 @@ public class TelaAdicionar extends javax.swing.JFrame {
     private void jcbCliente_TelaAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCliente_TelaAdicionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbCliente_TelaAdicionarActionPerformed
-
+    
+    //preenche o o combo cliente e proprietario
     private void jcbCliente_TelaAdicionarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCliente_TelaAdicionarItemStateChanged
         try{
             if(jcbCliente_TelaAdicionar.getSelectedIndex() > 0){

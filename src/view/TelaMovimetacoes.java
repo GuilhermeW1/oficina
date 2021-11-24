@@ -6,6 +6,7 @@
 package view;
 
 import contoller.MovimentacoesController;
+import tools.CaixaDeDialogo;
 import tools.Combos;
 
 /**
@@ -48,6 +49,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lblMovimentos = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbMovimentacoesPendentes = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -77,6 +79,13 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
         lblMovimentos.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblMovimentos.setText("Pendentes");
 
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -84,13 +93,17 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(338, 338, 338)
                 .addComponent(lblMovimentos)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(lblMovimentos)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton1)
+                    .addComponent(lblMovimentos))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -258,17 +271,46 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jmenuPendentesActionPerformed
     
     
-    //metodo que pega a liçnha selecionada
+    //metodo de clique do mouse para marcar como concluida uma movimentacao
     private void jtbMovimentacoesPendentesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMovimentacoesPendentesMousePressed
+        /*
         int linhaSelecionada = jtbMovimentacoesPendentes.getSelectedRow();
         
         String codigo = jtbMovimentacoesPendentes.getModel().getValueAt(linhaSelecionada, 0).toString();
+        */
         
-        
+        if(jtbMovimentacoesPendentes.isColumnSelected(3)){
+             boolean pergunta = CaixaDeDialogo.obterinstancia()
+                            .pedirConfirmacao("Marcar movimentacao como concluida?", "", 'p');
+            
+             if(pergunta){
+                mvController = new MovimentacoesController();
+                int linhaSelecionada = jtbMovimentacoesPendentes.getSelectedRow();
+                String codigo = jtbMovimentacoesPendentes.getModel().getValueAt(linhaSelecionada, 0).toString();
+                int id = Integer.parseInt(codigo);
+                
+                if(mvController.marcarComoConcluido(id)){
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Movimentacao marcada como concluida");
+                    atualizarTabela("p");
+                }else{
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao marcar movimentacao");
+                }
+                
+                 
+             }
+        }
                 
         
         
     }//GEN-LAST:event_jtbMovimentacoesPendentesMousePressed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        /*
+        MovimentacoesController mv = new MovimentacoesController();
+        String a ="2";
+        mv.buscar(a);
+        */
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,6 +384,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JMenuItem jmenuAdicionar;
     private javax.swing.JMenuItem jmenuEncerrados;
     private javax.swing.JMenuItem jmenuPendentes;

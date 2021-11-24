@@ -14,29 +14,31 @@ import java.util.Date;
  */
 public class Datas {
     
-    public Date coverterStringData(String data){
+    
+    public static String stringFormataData(String data){
         try{
-           
-        String DateN = data.replaceAll("-", "/");
-        
-        Date dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-        return dataFormatada;
-        
+        String data1 = data.replace("/", "-");
+        Date dataFormatada = new SimpleDateFormat("dd-MM-yyyy").parse(data1);
+        String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(dataFormatada);
+        return dataCerta;
         }catch(Exception e){
-            System.out.println(""+e);
+            System.out.println("erro data "+e);
             return null;
         }
-        
     }
     
-    public String converterDateString(){
+    
+    public static Date stringDataBanco(String data) {
+        try{
         
+        String data1 = stringFormataData(data);
+        
+        java.sql.Date date = java.sql.Date.valueOf(data1);
+        return date;
+        }catch(Exception e){
+            System.out.println("erro datas "+e);
+            return null;
+        }
     }
-    
-    /*
-    Date dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(txtDtParto.getText());
-    
-    String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(dataFormatada);
-    */
     
 }
