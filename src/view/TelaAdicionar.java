@@ -5,7 +5,9 @@
  */
 package view;
 
+import contoller.MovimentacoesController;
 import contoller.ServicosController;
+import model.Movimentacoes;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -18,6 +20,8 @@ public class TelaAdicionar extends javax.swing.JFrame {
     /**
      * Creates new form TelaAdicionar
      */
+    Movimentacoes modelMovimentacao;
+    MovimentacoesController controllerMov;
     ServicosController serController;
     Combos comboProprietario, comboVeiculo, comboServico;
     
@@ -309,7 +313,7 @@ public class TelaAdicionar extends javax.swing.JFrame {
     private void jcbVeiculo_TelaAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVeiculo_TelaAdicionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbVeiculo_TelaAdicionarActionPerformed
-
+    //botao adicionar movimentacao
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         
