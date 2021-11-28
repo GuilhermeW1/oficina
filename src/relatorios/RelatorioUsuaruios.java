@@ -71,7 +71,7 @@ public class RelatorioUsuaruios extends javax.swing.JFrame {
     //botao de gerar relatorio
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try{
-           String sql = "select id_usuarios , nome, login from usuarios";
+           String sql = "select id_usuarios as id , nome, login,senha from usuarios";
            
            RelatorioController relatorioController = new RelatorioController();
            
@@ -80,7 +80,7 @@ public class RelatorioUsuaruios extends javax.swing.JFrame {
             ResultSet resultSet = relatorioController.buscarRelatorio(sql);//Buscar os dados do relatório
             
             JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
-            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioMovimentacao.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioUsuarios.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
             JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
             jpViewer.setVisible(true);//abre o relatório para visualização
             jpViewer.toFront();//define o form a frente da aplicação

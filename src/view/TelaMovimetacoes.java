@@ -284,6 +284,7 @@ public class TelaMovimetacoes extends javax.swing.JFrame {
                 int linhaSelecionada = jtbMovimentacoesPendentes.getSelectedRow();
                 String codigo = jtbMovimentacoesPendentes.getModel().getValueAt(linhaSelecionada, 0).toString();
                 int id = Integer.parseInt(codigo);
+                 System.out.println("integer "+id);
                 
                 if(mvController.marcarComoConcluido(id)){
                     

@@ -350,6 +350,7 @@ public class TelaAdicionar extends javax.swing.JFrame {
                 TelaMovimetacoes tela = new TelaMovimetacoes();
                 
                 tela.atualizarTabela("p");
+                limparTela();
                 
                 
             }else{
@@ -366,7 +367,10 @@ public class TelaAdicionar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
     private void limparTela(){
-        
+        dtAdicionar.setText("");
+        jcbCliente_TelaAdicionar.setSelectedIndex(0);
+        jcbServico_TelaAdicionar.setSelectedIndex(0);
+        jcbVeiculo_TelaAdicionar.setSelectedIndex(0);
         
         
         

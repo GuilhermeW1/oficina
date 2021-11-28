@@ -70,6 +70,8 @@ public class MovimentacoesController {
         cabecalhos.add("Data de entrada");
         if(tipo.equals("p")){
             cabecalhos.add("Concluido");
+        }else{
+            cabecalhos.add("Dt Entrega");
         }
         
                    
@@ -92,7 +94,7 @@ public class MovimentacoesController {
         }else if(tipo.equals("e")){
             
             wSql.append( " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd / mm / yyyy'), " );
-            wSql.append( " m.encerrados ");
+            wSql.append( " m.encerrados, to_char(m.dt_entrega, 'dd / mm / yyyy') ");
             wSql.append( " from movimentacoes m , veiculo v " );
             wSql.append( " where m.id_veiculo= v.id_veiculo ");
             wSql.append( " and encerrados = true; ");
@@ -112,7 +114,7 @@ public class MovimentacoesController {
                 if(tipo.equals("p")){
                  linha.add("X");
                 }else if (tipo.equals("e")){
-                    
+                    linha.add(result.getString(5));
                 }
 
                 dadosTabela.add(linha);
@@ -214,8 +216,8 @@ public class MovimentacoesController {
             if(buscar(id)){
                 java.sql.Date data = tools.Datas.dataHojeToDateSQL();
                 
-                sql.append("update movimentacoes set encerrados = 'true' ");
-                sql.append(" dt_entrega ="+data);
+                sql.append("update movimentacoes set encerrados = 'true', ");
+                sql.append(" dt_entrega = '"+data+"'");
                 sql.append(" where id_movimentacao ="+id);
                 
                 

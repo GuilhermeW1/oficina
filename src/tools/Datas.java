@@ -57,9 +57,13 @@ public class Datas {
     recebe um tipo string e o retorna como tipo DATE SQL
     */
     public static java.sql.Date stringTodataSql(String data){
+        try{
         java.sql.Date dat = java.sql.Date.valueOf(data);
         return dat;
-        
+        }catch(Exception e){
+            System.out.println("erro stringToDatasql"+e);
+            return null;
+        }
     }
     
     /*
