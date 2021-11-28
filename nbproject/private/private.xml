@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/ProprietarioController.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaVeiculo.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/MovimentacoesController.java</file>
@@ -18,6 +19,13 @@
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Proprietario.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaMovimetacoes.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaServicos.java</file>
+=======
+            <file>file:/C:/Users/guilherme.w1/Desktop/ProjetosCerto/oficina/src/view/TelaAdicionar.java</file>
+            <file>file:/C:/Users/guilherme.w1/Desktop/ProjetosCerto/oficina/src/relatorios/RelatorioUsuaruios.java</file>
+            <file>file:/C:/Users/guilherme.w1/Desktop/ProjetosCerto/oficina/src/model/User.java</file>
+            <file>file:/C:/Users/guilherme.w1/Desktop/ProjetosCerto/oficina/src/view/TelaMovimetacoes.java</file>
+            <file>file:/C:/Users/guilherme.w1/Desktop/ProjetosCerto/oficina/src/contoller/RelatorioController.java</file>
+>>>>>>> 0f17ec998c985f9b0fdeb2d48018b786a485e809
         </group>
     </open-files>
 </project-private>

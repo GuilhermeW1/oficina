@@ -6,12 +6,17 @@
 package view;
 
 import contoller.MovimentacoesController;
+
 import contoller.ServicoMovimentacaoController;
 import contoller.ServicosController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.Movimentacoes;
 import model.ServicoMovimentacao;
+
+import contoller.ServicosController;
+import model.Movimentacoes;
+
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -24,6 +29,8 @@ public class TelaAdicionar extends javax.swing.JFrame {
     /**
      * Creates new form TelaAdicionar
      */
+    Movimentacoes modelMovimentacao;
+    MovimentacoesController controllerMov;
     ServicosController serController;
     Combos comboProprietario, comboVeiculo, comboServico;
     
@@ -316,7 +323,11 @@ public class TelaAdicionar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbVeiculo_TelaAdicionarActionPerformed
 
+
     //botao de salvar e adicionar movimentacoes
+
+    //botao adicionar movimentacao
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean validacao = validarDados();
         
