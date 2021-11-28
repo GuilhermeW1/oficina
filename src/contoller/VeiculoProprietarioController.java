@@ -114,7 +114,7 @@ public class VeiculoProprietarioController {
     }
     
     
-    
+    /*
     public boolean transaction(Veiculo v, int id_Proprietario){
         Connection con = Conexao.getConnection();
         try{
@@ -140,4 +140,6 @@ public class VeiculoProprietarioController {
             return false;
         }    
     }
+    */
+    
 }

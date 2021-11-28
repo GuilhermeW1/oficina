@@ -5,7 +5,13 @@
  */
 package view;
 
+import contoller.MovimentacoesController;
+import contoller.ServicoMovimentacaoController;
 import contoller.ServicosController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import model.Movimentacoes;
+import model.ServicoMovimentacao;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -310,12 +316,132 @@ public class TelaAdicionar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbVeiculo_TelaAdicionarActionPerformed
 
+    //botao de salvar e adicionar movimentacoes
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        boolean validacao = validarDados();
+        
+        if(validacao){
+            Movimentacoes objMov = new Movimentacoes();
+            objMov = guardarDados();
+            
+            MovimentacoesController movController = new MovimentacoesController();
+            if(movController.inserir(objMov)){
+                
+                ServicoMovimentacaoController serMovController = new ServicoMovimentacaoController();
+                ServicoMovimentacao serObj = new ServicoMovimentacao();
+                
+                serObj = guardarDadosRel();
+                
+                serMovController.inserir(serObj);
+                
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Movimentacao adicionada com sucesso");
+                
+                TelaMovimetacoes tela = new TelaMovimetacoes();
+                
+                tela.atualizarTabela("p");
+                
+                
+            }else{
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao adicionar movimentacao");
+
+            }
+            
+            
+            
+        }
+        
         
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+    private void limparTela(){
+        
+        
+        
+        
+    }
+    private Movimentacoes guardarDados(){
+        try{
+        Movimentacoes obj = new Movimentacoes();
+        
+        Combos c = (Combos) jcbVeiculo_TelaAdicionar.getSelectedItem();
+        int veiculo = Integer.parseInt(c.getCodigo());
+        
+        /*
+        Date dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(dtAdicionar.getText().trim);
+        System.out.println(""+dataFormatada);
+       
+        String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(dataFormatada);
+        */
+        
+        String dataCerta = tools.Datas.formatPadraoBanco(dtAdicionar.getText().trim());
+            
+        
+        obj.setDt_entrada(dataCerta);
+        obj.setDt_entrega(null);
+        obj.setId_veiculo(veiculo);
+        obj.setEncerrados(false);
+        
+        return obj;
+        }catch(Exception e){
+            System.out.println("erro " +e.getMessage());
+            return null;
+        }
+        
+    }
+    
+    private ServicoMovimentacao guardarDadosRel(){
+        
+        ServicoMovimentacao serMovObj = new ServicoMovimentacao();
+        ServicoMovimentacaoController serMController = new ServicoMovimentacaoController();
+        
+        int index = serMController.buscarUltimoIdice();
+        int linha = jtbAdicionarServico.getSelectedRow();
+        
+        String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
+        int servico = Integer.parseInt(codigo);
+        
+        serMovObj.setId_servico(servico);
+        serMovObj.setId_movimentacao(index);
+        
+        return serMovObj;
+    }
+    
+    private boolean validarDados(){
+        try{
+        Combos c = (Combos) jcbCliente_TelaAdicionar.getSelectedItem();
+        //Combos c1 = (Combos) jcbServico_TelaAdicionar.getSelectedItem();
+        Combos c2 = (Combos) jcbVeiculo_TelaAdicionar.getSelectedItem();
+        
+        int linha = jtbAdicionarServico.getSelectedRow();
+        String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
+        
+         if(c.equals("") ){
+            
+             CaixaDeDialogo.obterinstancia().exibirMensagem("CLIENTE nao selecionado");
+             return false;
+     
+         }
+         if(c2.equals("")){
+             CaixaDeDialogo.obterinstancia().exibirMensagem("VEICULO nao selecionado");
+               return false;
 
+         }
+         if(codigo.equals("")){
+             CaixaDeDialogo.obterinstancia().exibirMensagem("SERVICO nao selecionado");
+            return false;
+
+             
+         }
+         return true;
+        }catch(Exception e){
+            System.out.println("erro validar dados" +e.getMessage());
+            return false;
+        }
+        
+        
+        
+    }
     /**
      * @param args the command line arguments
      */

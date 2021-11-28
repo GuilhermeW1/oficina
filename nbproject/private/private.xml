@@ -3,8 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaAdicionar.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/ProprietarioController.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaVeiculo.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/MovimentacoesController.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/ServicoMovimentacaoController.java</file>
             <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaLogin.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/tools/Datas.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Movimentacoes.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaProprietario.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaAdicionar.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/VeiculoProprietarioController.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/contoller/ServicosController.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/ServicoMovimentacao.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/model/Proprietario.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaMovimetacoes.java</file>
+            <file>file:/C:/Users/Guilherme/Documents/NetbeansProjects/oficina/src/view/TelaServicos.java</file>
         </group>
     </open-files>
 </project-private>

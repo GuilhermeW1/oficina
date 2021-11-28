@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Movimentacoes;
+import tools.CaixaDeDialogo;
 
 /**
  *
@@ -67,7 +68,10 @@ public class MovimentacoesController {
         cabecalhos.add("Id");
         cabecalhos.add("Placa");
         cabecalhos.add("Data de entrada");
-        cabecalhos.add("Concluido");
+        if(tipo.equals("p")){
+            cabecalhos.add("Concluido");
+        }
+        
                    
 
         ResultSet result = null;
@@ -108,7 +112,7 @@ public class MovimentacoesController {
                 if(tipo.equals("p")){
                  linha.add("X");
                 }else if (tipo.equals("e")){
-                    linha.add("V");
+                    
                 }
 
                 dadosTabela.add(linha);
@@ -206,12 +210,18 @@ public class MovimentacoesController {
             PreparedStatement stmt = null;
             
             StringBuilder sql = new StringBuilder();
+            
             if(buscar(id)){
-            
-                sql.append("update movimentacoes set encerrados = 'true' where id_movimentacao = "+id);
-            
+                java.sql.Date data = tools.Datas.dataHojeToDateSQL();
+                
+                sql.append("update movimentacoes set encerrados = 'true' ");
+                sql.append(" dt_entrega ="+data);
+                sql.append(" where id_movimentacao ="+id);
+                
+                
                 stmt = con.prepareStatement(sql.toString());
-            
+                
+                
                 stmt.executeUpdate();
                 return true;
             
@@ -220,7 +230,7 @@ public class MovimentacoesController {
             }
             
         }catch(Exception e){
-            System.out.println("e"+e.getMessage());
+            System.out.println("erro marcar como conlcuido"+e.getMessage());
             return false;
         }
         
@@ -265,5 +275,40 @@ public class MovimentacoesController {
         
     }
 */
+    
+    
+    public boolean inserir(Movimentacoes objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            
+            
+            
+            StringBuilder sql = new StringBuilder();
+            
+            sql.append("insert into movimentacoes values(default, ?,?,?, ?)");
+            System.out.println("data "+objeto.getDt_entrada());
+            
+            java.sql.Date data = tools.Datas.stringTodataSql(objeto.getDt_entrada());
+            System.out.println("data "+data);
+
+            
+            stmt = con.prepareStatement(sql.toString());
+            stmt.setDate(1, data);
+            stmt.setDate(2, null);
+            stmt.setInt(3, objeto.getId_veiculo());
+            stmt.setBoolean(4, objeto.isEncerrados());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        }catch(SQLException e){ 
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro incluir movimentacao"+e.getMessage());
+            return false;
+        }
+        
+        
+    }
 }   
 

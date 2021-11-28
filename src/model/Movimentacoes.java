@@ -13,9 +13,9 @@ public class Movimentacoes {
     
     private int id_movimentacoes;
     private String dt_entrada;
-    private boolean encerrados;
     private String dt_entrega;
     private int id_veiculo;
+    private boolean encerrados;
 
     public int getId_movimentacoes() {
         return id_movimentacoes;

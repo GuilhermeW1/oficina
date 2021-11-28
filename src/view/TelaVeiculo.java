@@ -315,6 +315,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
         
         return id_proprietario;
     }
+    
     public boolean validarDados(){
         if(txtCor_TelaVeiculo.equals("")){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Cor do veiculo nula");
