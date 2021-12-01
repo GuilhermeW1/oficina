@@ -228,10 +228,12 @@ public class TelaServicos extends javax.swing.JFrame {
     
        Servicos servicos;
        
+       //se o id setado na label da tela permanecer padrao id ele ira inserir 
+       //o label id so ira mudar quando um campo for selecionado
        if(lblId.getText().equals("ID")){
            
        
-       
+       /*caso a validacao encontre algum erro a mesma retornara -1*/
        double validacao = validarDados();
        
        if(validacao == -1 ){
@@ -239,7 +241,7 @@ public class TelaServicos extends javax.swing.JFrame {
             
       
        }else{
-           
+           //se nao encontrado nenhum erro 
            servicos = guardarDados(validacao, 0);
            ServicosController servicoController = new ServicosController();
           
@@ -330,6 +332,7 @@ public class TelaServicos extends javax.swing.JFrame {
             
             if(valor < 0 ){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Valor menor do que 0.00");
+                return -1;
 
             }
             

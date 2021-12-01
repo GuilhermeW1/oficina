@@ -424,20 +424,21 @@ public class TelaAdicionar extends javax.swing.JFrame {
     
     private boolean validarDados(){
         try{
-        Combos c = (Combos) jcbCliente_TelaAdicionar.getSelectedItem();
+        int c =  jcbCliente_TelaAdicionar.getSelectedIndex();
         //Combos c1 = (Combos) jcbServico_TelaAdicionar.getSelectedItem();
-        Combos c2 = (Combos) jcbVeiculo_TelaAdicionar.getSelectedItem();
+        int c2 =  jcbVeiculo_TelaAdicionar.getSelectedIndex();;
         
         int linha = jtbAdicionarServico.getSelectedRow();
+        
         String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
         
-         if(c.equals("") ){
+         if(c == 0 ){
             
              CaixaDeDialogo.obterinstancia().exibirMensagem("CLIENTE nao selecionado");
              return false;
      
          }
-         if(c2.equals("")){
+         if(c2== 0){
              CaixaDeDialogo.obterinstancia().exibirMensagem("VEICULO nao selecionado");
                return false;
 
@@ -448,6 +449,12 @@ public class TelaAdicionar extends javax.swing.JFrame {
 
              
          }
+         if(dtAdicionar.getText().equals("")){
+                          CaixaDeDialogo.obterinstancia().exibirMensagem("Data nao selecionado");
+
+             return false;
+         }
+         
          return true;
         }catch(Exception e){
             System.out.println("erro validar dados" +e.getMessage());

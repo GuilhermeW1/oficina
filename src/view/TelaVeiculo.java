@@ -246,6 +246,9 @@ public class TelaVeiculo extends javax.swing.JFrame {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("erro "+e.getMessage());
             }
             
+        }else{
+                                   CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao adicionar");
+
         }
         
        
@@ -317,14 +320,28 @@ public class TelaVeiculo extends javax.swing.JFrame {
     }
     
     public boolean validarDados(){
-        if(txtCor_TelaVeiculo.equals("")){
+        
+        
+        int a =  jC_Proprietraio_TelaVeiculo.getSelectedIndex();
+
+        if(a == 0){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione um proprietario");
+            return false;
+        }
+        
+        
+        
+        
+        if(txtCor_TelaVeiculo.getText().equals("")){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Cor do veiculo nula");
             return false;
         }
-        if(txtPlaca_TelaVeiculo.equals("")){
+        if(txtPlaca_TelaVeiculo.getText().equals("")){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Placa do veiculo nula");
             return false;
-        }  
+        } 
+        
+       
         return true;
        
         
