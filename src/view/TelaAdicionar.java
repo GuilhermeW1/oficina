@@ -5,16 +5,15 @@
  */
 package view;
 
-import contoller.MovimentacoesController;
-
-import contoller.ServicoMovimentacaoController;
-import contoller.ServicosController;
+import controller.MovimentacoesController;
+import controller.ServicoMovimentacaoController;
+import controller.ServicosController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.Movimentacoes;
 import model.ServicoMovimentacao;
 
-import contoller.ServicosController;
+import controller.ServicosController;
 import model.Movimentacoes;
 
 import tools.CaixaDeDialogo;
@@ -33,58 +32,57 @@ public class TelaAdicionar extends javax.swing.JFrame {
     MovimentacoesController controllerMov;
     ServicosController serController;
     Combos comboProprietario, comboVeiculo, comboServico;
-    
+
     public TelaAdicionar() {
         initComponents();
-        
+
         atualizarTabelaProp();
-        
+
         atualizarTabelaVeiculo(0);
-        
+
         serController = new ServicosController();
         serController.preencher(jtbAdicionarServico);
-       
+
         atualizarTabelaServicos();
-        
+
     }
-    
-    public void atualizarTabelaProp(){
-        try{
+
+    public void atualizarTabelaProp() {
+        try {
             comboProprietario = new Combos(jcbCliente_TelaAdicionar);
             comboProprietario.PreencheCombo("select id_proprietario, nome from proprietario", "Proprietario..");
-            
-        }catch(Exception e){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela "+e);
+
+        } catch (Exception e) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela " + e);
         }
     }
-    
-    public void atualizarTabelaVeiculo(int prop ){
-        try{
-            
-            String sql = " select v.id_veiculo, v.placa  " +
-                     " from veiculo v, proprietario p, veiculo_proprietario vp " +
-                     " where vp.id_veiculo = v.id_veiculo " +
-                     " and vp.id_proprietario = p.id_proprietario " +
-                     " and p.id_proprietario =  "+prop;
-            
+
+    public void atualizarTabelaVeiculo(int prop) {
+        try {
+
+            String sql = " select v.id_veiculo, v.placa  "
+                    + " from veiculo v, proprietario p, veiculo_proprietario vp "
+                    + " where vp.id_veiculo = v.id_veiculo "
+                    + " and vp.id_proprietario = p.id_proprietario "
+                    + " and p.id_proprietario =  " + prop;
+
             comboVeiculo = new Combos(jcbVeiculo_TelaAdicionar);
             comboVeiculo.PreencheCombo(sql, "Placa..");
-            
-        }catch(Exception e){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela "+e);
+
+        } catch (Exception e) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela " + e);
         }
-        
+
     }
-    
-    public void atualizarTabelaServicos(){
-        try{
-        comboServico = new Combos(jcbServico_TelaAdicionar);
-        comboServico.PreencheCombo("select id_servico, ds_servico from servicos", "Servico..");
-    }catch(Exception e){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela "+e);
+
+    public void atualizarTabelaServicos() {
+        try {
+            comboServico = new Combos(jcbServico_TelaAdicionar);
+            comboServico.PreencheCombo("select id_servico, ds_servico from servicos", "Servico..");
+        } catch (Exception e) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("erro atualizar tabela " + e);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,6 +160,11 @@ public class TelaAdicionar extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbAdicionarServico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbAdicionarServicoMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbAdicionarServico);
 
         jLabel5.setText("Valor");
@@ -296,17 +299,17 @@ public class TelaAdicionar extends javax.swing.JFrame {
     private void jcbCliente_TelaAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCliente_TelaAdicionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbCliente_TelaAdicionarActionPerformed
-    
+
     //preenche o o combo cliente e proprietario
     private void jcbCliente_TelaAdicionarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCliente_TelaAdicionarItemStateChanged
-        try{
-            if(jcbCliente_TelaAdicionar.getSelectedIndex() > 0){
+        try {
+            if (jcbCliente_TelaAdicionar.getSelectedIndex() > 0) {
                 Combos c = (Combos) jcbCliente_TelaAdicionar.getSelectedItem();
                 int prop = Integer.parseInt(c.getCodigo());
                 atualizarTabelaVeiculo(prop);
             }
-    
-        }catch(Exception e){
+
+        } catch (Exception e) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao buscar clientes: " + e.getMessage());
         }
     }//GEN-LAST:event_jcbCliente_TelaAdicionarItemStateChanged
@@ -323,147 +326,151 @@ public class TelaAdicionar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbVeiculo_TelaAdicionarActionPerformed
 
-
     //botao de salvar e adicionar movimentacoes
-
     //botao adicionar movimentacao
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean validacao = validarDados();
-        
-        if(validacao){
-            Movimentacoes objMov = new Movimentacoes();
-            objMov = guardarDados();
-            
-            MovimentacoesController movController = new MovimentacoesController();
-            if(movController.inserir(objMov)){
-                
-                ServicoMovimentacaoController serMovController = new ServicoMovimentacaoController();
-                ServicoMovimentacao serObj = new ServicoMovimentacao();
-                
-                serObj = guardarDadosRel();
-                
-                serMovController.inserir(serObj);
-                
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Movimentacao adicionada com sucesso");
-                
-                TelaMovimetacoes tela = new TelaMovimetacoes();
-                
-                tela.atualizarTabela("p");
-                limparTela();
-                
-                
-            }else{
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao adicionar movimentacao");
 
+        if (validacao) {
+
+            for (int i = 0; i < jtbAdicionarServico.getRowCount() - 1; i++) {
+
+                boolean marcado = (Boolean) jtbAdicionarServico.getModel().getValueAt(i, 3);
+
+                if (marcado) {
+                    Movimentacoes objMov = new Movimentacoes();
+                    objMov = guardarDados();
+
+                    MovimentacoesController movController = new MovimentacoesController();
+                    if (movController.inserir(objMov)) {
+
+                        ServicoMovimentacaoController serMovController = new ServicoMovimentacaoController();
+                        ServicoMovimentacao serObj = new ServicoMovimentacao();
+
+                        serObj = guardarDadosRel();
+
+                        serMovController.inserir(serObj);
+
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Movimentacao adicionada com sucesso");
+
+                        TelaMovimetacoes tela = new TelaMovimetacoes();
+
+                        tela.atualizarTabela("p");
+                        limparTela();
+
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao adicionar movimentacao");
+
+                    }
+                }
             }
-            
-            
-            
+
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void limparTela(){
+
+    private void jtbAdicionarServicoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbAdicionarServicoMousePressed
+
+        int linha = jtbAdicionarServico.getSelectedRow();
+        String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
+
+
+    }//GEN-LAST:event_jtbAdicionarServicoMousePressed
+    private void limparTela() {
         dtAdicionar.setText("");
         jcbCliente_TelaAdicionar.setSelectedIndex(0);
         jcbServico_TelaAdicionar.setSelectedIndex(0);
         jcbVeiculo_TelaAdicionar.setSelectedIndex(0);
-        
-        
-        
+
     }
-    private Movimentacoes guardarDados(){
-        try{
-        Movimentacoes obj = new Movimentacoes();
-        
-        Combos c = (Combos) jcbVeiculo_TelaAdicionar.getSelectedItem();
-        int veiculo = Integer.parseInt(c.getCodigo());
-        
-        /*
+
+    private Movimentacoes guardarDados() {
+        try {
+            Movimentacoes obj = new Movimentacoes();
+
+            Combos c = (Combos) jcbVeiculo_TelaAdicionar.getSelectedItem();
+            int veiculo = Integer.parseInt(c.getCodigo());
+
+            /*
         Date dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(dtAdicionar.getText().trim);
         System.out.println(""+dataFormatada);
        
         String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(dataFormatada);
-        */
-        
-        String dataCerta = tools.Datas.formatPadraoBanco(dtAdicionar.getText().trim());
-            
-        
-        obj.setDt_entrada(dataCerta);
-        obj.setDt_entrega(null);
-        obj.setId_veiculo(veiculo);
-        obj.setEncerrados(false);
-        
-        return obj;
-        }catch(Exception e){
-            System.out.println("erro " +e.getMessage());
+             */
+            String dataCerta = tools.Datas.formatPadraoBanco(dtAdicionar.getText().trim());
+
+            obj.setDt_entrada(dataCerta);
+            obj.setDt_entrega(null);
+            obj.setId_veiculo(veiculo);
+            obj.setEncerrados(false);
+
+            return obj;
+        } catch (Exception e) {
+            System.out.println("erro " + e.getMessage());
             return null;
         }
-        
+
     }
-    
-    private ServicoMovimentacao guardarDadosRel(){
-        
+
+    private ServicoMovimentacao guardarDadosRel() {
+
         ServicoMovimentacao serMovObj = new ServicoMovimentacao();
         ServicoMovimentacaoController serMController = new ServicoMovimentacaoController();
-        
+
         int index = serMController.buscarUltimoIdice();
         int linha = jtbAdicionarServico.getSelectedRow();
-        
+
         String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
         int servico = Integer.parseInt(codigo);
-        
+
         serMovObj.setId_servico(servico);
         serMovObj.setId_movimentacao(index);
-        
+
         return serMovObj;
     }
-    
-    private boolean validarDados(){
-        try{
-        int c =  jcbCliente_TelaAdicionar.getSelectedIndex();
-        //Combos c1 = (Combos) jcbServico_TelaAdicionar.getSelectedItem();
-        int c2 =  jcbVeiculo_TelaAdicionar.getSelectedIndex();;
-        
-        int linha = jtbAdicionarServico.getSelectedRow();
-        
-        String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
-        
-         if(c == 0 ){
-            
-             CaixaDeDialogo.obterinstancia().exibirMensagem("CLIENTE nao selecionado");
-             return false;
-     
-         }
-         if(c2== 0){
-             CaixaDeDialogo.obterinstancia().exibirMensagem("VEICULO nao selecionado");
-               return false;
 
-         }
-         if(codigo.equals("")){
-             CaixaDeDialogo.obterinstancia().exibirMensagem("SERVICO nao selecionado");
-            return false;
+    private boolean validarDados() {
+        try {
+            int c = jcbCliente_TelaAdicionar.getSelectedIndex();
+            //Combos c1 = (Combos) jcbServico_TelaAdicionar.getSelectedItem();
+            int c2 = jcbVeiculo_TelaAdicionar.getSelectedIndex();;
 
-             
-         }
-         if(dtAdicionar.getText().equals("")){
-                          CaixaDeDialogo.obterinstancia().exibirMensagem("Data nao selecionado");
+            int linha = jtbAdicionarServico.getSelectedRow();
 
-             return false;
-         }
-         
-         return true;
-        }catch(Exception e){
-            System.out.println("erro validar dados" +e.getMessage());
+            String codigo = jtbAdicionarServico.getModel().getValueAt(linha, 0).toString();
+
+            if (c == 0) {
+
+                CaixaDeDialogo.obterinstancia().exibirMensagem("CLIENTE nao selecionado");
+                return false;
+
+            }
+            if (c2 == 0) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("VEICULO nao selecionado");
+                return false;
+
+            }
+            if (codigo.equals("")) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("SERVICO nao selecionado");
+                return false;
+
+            }
+            if (dtAdicionar.getText().equals("")) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Data nao selecionado");
+
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("erro validar dados" + e.getMessage());
             return false;
         }
-        
-        
-        
+
     }
+
     /**
      * @param args the command line arguments
      */

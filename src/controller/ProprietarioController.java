@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package contoller;
+package controller;
 
 import database.Conexao;
 import java.awt.Color;
@@ -17,24 +17,62 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import model.Veiculo;
+import model.Proprietario;
 import tools.CaixaDeDialogo;
+
 /**
  *
  * @author guilherme.w1
  */
-public class VeiculoController {
+public class ProprietarioController {
     
-    /*
-    public void popular(JTable jTable){
-        String sql = " select p.nome, v.placa, v.cor\n " +
-                     " from veiculo v, proprietario p, veiculo_proprietario vp\n " +
-                     " where vp.id_veiculo = v.id_veiculo\n " +
-                     " and vp.id_proprietario = p.id_proprietario ";
-        Preencher preencher = new  Preencher();
-        preencher.preencher(jTable, sql, 1, 3);
+    public boolean incluir(Proprietario objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            
+            if(existe(objeto) == true){
+                return false;
+            }else {
+                String sql = "insert into proprietario values(default, ?,?,?) ";
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, objeto.getNome());
+                stmt.setString(2, objeto.getCodigo());
+                stmt.setString(3, objeto.getTppessoa().toUpperCase());
+                
+                stmt.executeUpdate();
+                return true;
+                        
+            }
+            
+        }catch(SQLException e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO INCLUIR PROPRIETARIO "+e.getMessage());
+            return false;
+        }
+        
     }
-    */
+    
+    private boolean existe(Proprietario objeto){
+       try{
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String sql = " select from proprietario where codigo = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, objeto.getCodigo());
+        rs = stmt.executeQuery();
+        if(rs.next()){
+            return true;
+        }else{
+        return false;
+        }
+       }catch(SQLException e){
+           CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO SQL EXISTE " +e.getMessage());
+           return false;
+       }
+       
+    }   
+    
     
     public void preencher(JTable jtbUsuarios) {
 
@@ -43,18 +81,17 @@ public class VeiculoController {
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector(); //receber os dados do banco
 
-        cabecalhos.add("Proprietario");
+        cabecalhos.add("Nome");
         cabecalhos.add("Placa");
-        cabecalhos.add("Cor");
+        cabecalhos.add("TP pessoa");
 
         ResultSet result = null;
         StringBuilder wSql = new StringBuilder();
         try {
 
-            wSql.append(" select p.nome, v.placa, v.cor ");
-            wSql.append(" from veiculo v, proprietario p, veiculo_proprietario vp ");
-            wSql.append(" where vp.id_veiculo = v.id_veiculo ");
-            wSql.append(" and vp.id_proprietario = p.id_proprietario ");
+            wSql.append(" select p.nome, p.codigo, p.tppessoa ");
+            wSql.append(" from proprietario p ");
+           
 
             result = Conexao.stmt.executeQuery(wSql.toString());
 
@@ -95,10 +132,10 @@ public class VeiculoController {
                     = jtbUsuarios.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
-                    column.setPreferredWidth(60);
+                    column.setPreferredWidth(150);
                     break;
                 case 1:
-                    column.setPreferredWidth(200);
+                    column.setPreferredWidth(100);
                     break;
                 case 3:
                     column.setPreferredWidth(10);
@@ -124,65 +161,5 @@ public class VeiculoController {
         });
         //return (true);
     }
-    
-    /*
-    public boolean incluir(Veiculo objeto){
-        try{
-        Connection con = Conexao.getConnection();
-        PreparedStatement stmt = null;
-        
-        StringBuilder sql = new StringBuilder();
-        
-        sql.append(" insert into veiculo values (default, ?, ?)");
-        
-        stmt = con.prepareStatement(sql.toString());
-        stmt.setString(1, objeto.getPlaca());
-        stmt.setString(2, objeto.getCor());
-        
-        stmt.executeUpdate();
-        return true;
-        }catch(SQLException e){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro incluir veiculo "+ e);
-            return false;
-        }
-        
-    } 
-    */
-    
-    public boolean inserir(Veiculo objeto) throws SQLException{
-        Connection con = Conexao.getConnection();
-        try{
-           // con.setAutoCommit(false);
-            
-            PreparedStatement stmt = null;
-            //insercao na tabela veiculos
-            StringBuilder sql = new StringBuilder();
-            sql.append(" insert into veiculo values (default, ?, ?)");
-            stmt = con.prepareStatement(sql.toString());
-            stmt.setString(1, objeto.getPlaca());
-            stmt.setString(2, objeto.getCor());
-            stmt.executeUpdate();
-            //insercao na tabela veiculo prop
-           
-            /*
-            if(veicPropController.inserir(id_Proprietario, con)){
-                System.out.println("relacao adicionada com sucesso ");
-            }
-            */
-            
-            
-            
-            
-           // con.commit();
-            return true;
-        }catch(SQLException e){
-            //con.rollback();
-            CaixaDeDialogo.obterinstancia().exibirMensagem("erro "+e.getMessage());
-            return false;
-        }
-        
-        
-    }
-    
     
 }

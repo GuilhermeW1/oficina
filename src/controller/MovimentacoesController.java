@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package contoller;
+package controller;
 
 import database.Conexao;
 import java.awt.Color;
@@ -28,35 +28,7 @@ import tools.CaixaDeDialogo;
  */
 public class MovimentacoesController {
     
-    /*public void popular(JTable jtbDefault, String tipo){
-        
-        
-        
-        Preencher preencher = new Preencher();
-         String wSql ="";
-        if(tipo.equals("p")){
-            wSql = " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " +
-                      " from movimentacoes m , veiculo v " +
-                      " where m.id_veiculo= v.id_veiculo "
-                    + " and encerrados = false;";
-        //preencher.preencher(jtbDefault, wSql, 0, 3 );     
-        }else if(tipo.equals("e")){
-            wSql = " select m.id_movimentacao, v.placa ,  to_char(m.dt_entrada, 'dd/mm/yyyy') " +
-                      " from movimentacoes m , veiculo v " +
-                      " where m.id_veiculo= v.id_veiculo "
-                    + " and encerrados = true;";
-            //preencher.preencher(jtbDefault, wSql, 0, 3 );  
-        }else{
-            
-        }
-          
-       
-        
-    }
- */
     
-    //preenche a tabela de movimentacoes de acordo com o botao selecionado
-    //por padrao a tela ira entrar nas movimentacoes pendentes
     public void preencher(JTable jtbUsuarios, String tipo) {
 
         Conexao.openConnection();
@@ -238,46 +210,7 @@ public class MovimentacoesController {
         
         
     }
-    
-    /*
-    public void buscar(String codigo){
-        Movimentacoes objMov;
-        try{
-        Connection con = Conexao.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        
-        String sql = "select id_movimentacao, to_char(dt_entrada 'dd/MM/yyyy'), id_veiculo, encerrados from movimentacoes where id_movimentacao ="+codigo;
-        stmt = con.prepareStatement(sql);
-        
-        rs = stmt.executeQuery();
-        
-        if(rs.next()){
-            objMov = new Movimentacoes();
-            
-            //tipo entrada nao existe tem que ver alsdfmlsaçdf
-            String dt_entrada = tools.Datas.stringFormataData(rs.getDate("dt_entrada").toString());
-            System.out.println(""+dt_entrada);
-            
-            objMov.setId_movimentacoes(rs.getInt("id_movimentacao"));
-            objMov.setDt_entrada(dt_entrada);
-            objMov.setId_veiculo(rs.getInt("id_veiculo"));
-            objMov.setEncerrados(rs.getBoolean("encerrados"));
-            
-            
-            
-            
-        }
-        
-        }catch(SQLException e){
-            System.out.println("erro " +e.getMessage());
-        }
-        
-        
-        
-    }
-*/
-    
+  
     
     public boolean inserir(Movimentacoes objeto){
         try{

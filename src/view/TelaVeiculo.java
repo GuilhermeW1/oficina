@@ -5,13 +5,13 @@
  */
 package view;
 
-import contoller.VeiculoController;
+import controller.VeiculoController;
 import java.sql.SQLException;
 import model.Veiculo;
 import model.VeiculoProprietario;
 import tools.CaixaDeDialogo;
 import tools.Combos;
-import contoller.VeiculoProprietarioController;
+import controller.VeiculoProprietarioController;
 
 /**
  *

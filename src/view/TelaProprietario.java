@@ -5,8 +5,8 @@
  */
 package view;
 
-import contoller.ProprietarioController;
-import contoller.MovimentacoesController;
+import controller.ProprietarioController;
+import controller.MovimentacoesController;
 import model.Proprietario;
 import tools.CaixaDeDialogo;
 import tools.Combos;

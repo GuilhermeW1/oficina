@@ -5,7 +5,7 @@
  */
 package view;
 
-import contoller.UserController;
+import controller.UserController;
 import tools.Tools;
 
 /**

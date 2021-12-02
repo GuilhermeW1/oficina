@@ -5,7 +5,7 @@
  */
 package relatorios;
 
-import contoller.RelatorioController;
+import controller.RelatorioController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;

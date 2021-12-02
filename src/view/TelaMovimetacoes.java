@@ -5,7 +5,7 @@
  */
 package view;
 
-import contoller.MovimentacoesController;
+import controller.MovimentacoesController;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 

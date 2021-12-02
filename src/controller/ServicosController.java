@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package contoller;
+package controller;
 
 import database.Conexao;
 import java.awt.Color;
@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import jxl.biff.drawing.CheckBox;
 import tools.CaixaDeDialogo;
 import model.Servicos;
 
@@ -144,8 +145,7 @@ public class ServicosController {
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getDouble(3));
-                linha.add("sla");
-                
+                linha.add(false);
 
                 dadosTabela.add(linha);
             }
@@ -166,11 +166,19 @@ public class ServicosController {
                 }
             }
               */  
+            @Override
+            public Class getColumnClass(int column) {
+                return getValueAt(1, column).getClass();
+            }
             
             @Override
             public boolean isCellEditable(int row, int column) {
-                //se column == 3 retorna true else false
-                return false;
+                if(column == 3){
+                    return true;
+                }else{
+                    return false;
+                }
+                
             }
             // permite seleção de apenas uma linha da tabela
         });
@@ -189,6 +197,9 @@ public class ServicosController {
                     break;
                 case 1:
                     column.setPreferredWidth(200);
+                    break;
+                case 2:
+                    column.setPreferredWidth(150);
                     break;
                 case 3:
                     column.setPreferredWidth(10);

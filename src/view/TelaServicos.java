@@ -5,7 +5,7 @@
  */
 package view;
 
-import contoller.ServicosController;
+import controller.ServicosController;
 import model.Servicos;
 import tools.CaixaDeDialogo;
 
@@ -207,6 +207,7 @@ public class TelaServicos extends javax.swing.JFrame {
        int linhaSelecionada = jtbServicos.getSelectedRow();
        
        String codigo = jtbServicos.getModel().getValueAt(linhaSelecionada, 0).toString();
+       
        servicos = new ServicosController();
        Servicos objeto =  servicos.buscar(codigo);
        
@@ -218,6 +219,8 @@ public class TelaServicos extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jtbServicosMousePressed
 
+    
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         limparTela();
     }//GEN-LAST:event_jButton4ActionPerformed

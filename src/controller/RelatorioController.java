@@ -1,4 +1,4 @@
-package contoller;
+package controller;
 
 import database.Conexao;
 import java.awt.Color;
