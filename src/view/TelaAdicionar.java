@@ -341,6 +341,8 @@ public class TelaAdicionar extends javax.swing.JFrame {
                 if (marcado) {
                     Movimentacoes objMov = new Movimentacoes();
                     objMov = guardarDados();
+                    
+                    objMov.set
 
                     MovimentacoesController movController = new MovimentacoesController();
                     if (movController.inserir(objMov)) {
